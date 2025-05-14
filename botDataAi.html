@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Criteria Submission</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #3498db;
+            font-size: 18px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .checkbox-group {
+            margin-top: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .checkbox-item {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-item input {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .col {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .status-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        
+        .select-all-container {
+            margin-bottom: 10px;
+        }
+        
+        .select-all-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-right: 5px;
+        }
+        
+        .select-all-btn:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Data Criteria</h1>
+        
+        <div class="section">
+            
+            <div class="form-group">
+
+                <label>Offer ID</label>
+                <input type="text" id="vertical" value="">
+            </div>
+            
+            <div class="form-group">
+                <label>Forbidden Stats</label>
+                <div class="select-all-container">
+                    <button class="select-all-btn" id="select-all-states">Select All</button>
+                    <button class="select-all-btn" id="deselect-all-states">Deselect All</button>
+                </div>
+                <div class="checkbox-group" id="states-checkbox-group">
+                    <!-- US states will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Health Select Stats:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="nothing-selected" checked>
+                        <label for="nothing-selected">Nothing selected</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="form-group">
+                        <label>Age</label>
+                        <input type="number" id="age" value="35">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Income</label>
+                        <select id="income">
+                            <option value="">Select</option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="form-group">
+                        <label>Device</label>
+                        <select id="device">
+                            <option value="">Select</option>
+                            <option value="mobile">Mobile</option>
+                            <option value="desktop">Desktop</option>
+                            <option value="tablet">Tablet</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="form-group">
+                        <label>Operating System</label>
+                        <select id="os">
+                            <option value="">Select</option>
+                            <option value="windows">Windows</option>
+                            <option value="macos">macOS</option>
+                            <option value="linux">Linux</option>
+                            <option value="android">Android</option>
+                            <option value="ios">iOS</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Client's Interaction Details</div>
+            
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Active period</label>
+                        <select id="active-period">
+                            <option value="">Select</option>
+                            <option value="7days">Last 7 days</option>
+                            <option value="30days">Last 30 days</option>
+                            <option value="90days">Last 90 days</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="form-group">
+                        <label>Active Hours</label>
+                        <select id="active-hours">
+                            <option value="">Select</option>
+                            <option value="morning">Morning (6am-12pm)</option>
+                            <option value="afternoon">Afternoon (12pm-6pm)</option>
+                            <option value="evening">Evening (6pm-12am)</option>
+                            <option value="night">Night (12am-6am)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>GENERATION DATE</label>
+                <input type="text" id="generation-date" value="Today's date will be auto-filled" readonly>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Gardner Ensemble</label>
+                        <select id="gardner-ensemble">
+                            <option value="">Select</option>
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="form-group">
+                        <label>Gardner Insured</label>
+                        <select id="gardner-insured">
+                            <option value="">Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="submit-btn" id="submit-btn">Send to Telegram Bot</button>
+        <div class="status-message" id="status-message"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set today's date in the generation date field
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('generation-date').value = formattedDate;
+            
+            // US States data
+            const usStates = [
+                {code: 'AL', name: 'Alabama'},
+                {code: 'AK', name: 'Alaska'},
+                {code: 'AZ', name: 'Arizona'},
+                {code: 'AR', name: 'Arkansas'},
+                {code: 'CA', name: 'California'},
+                {code: 'CO', name: 'Colorado'},
+                {code: 'CT', name: 'Connecticut'},
+                {code: 'DE', name: 'Delaware'},
+                {code: 'FL', name: 'Florida'},
+                {code: 'GA', name: 'Georgia'},
+                {code: 'HI', name: 'Hawaii'},
+                {code: 'ID', name: 'Idaho'},
+                {code: 'IL', name: 'Illinois'},
+                {code: 'IN', name: 'Indiana'},
+                {code: 'IA', name: 'Iowa'},
+                {code: 'KS', name: 'Kansas'},
+                {code: 'KY', name: 'Kentucky'},
+                {code: 'LA', name: 'Louisiana'},
+                {code: 'ME', name: 'Maine'},
+                {code: 'MD', name: 'Maryland'},
+                {code: 'MA', name: 'Massachusetts'},
+                {code: 'MI', name: 'Michigan'},
+                {code: 'MN', name: 'Minnesota'},
+                {code: 'MS', name: 'Mississippi'},
+                {code: 'MO', name: 'Missouri'},
+                {code: 'MT', name: 'Montana'},
+                {code: 'NE', name: 'Nebraska'},
+                {code: 'NV', name: 'Nevada'},
+                {code: 'NH', name: 'New Hampshire'},
+                {code: 'NJ', name: 'New Jersey'},
+                {code: 'NM', name: 'New Mexico'},
+                {code: 'NY', name: 'New York'},
+                {code: 'NC', name: 'North Carolina'},
+                {code: 'ND', name: 'North Dakota'},
+                {code: 'OH', name: 'Ohio'},
+                {code: 'OK', name: 'Oklahoma'},
+                {code: 'OR', name: 'Oregon'},
+                {code: 'PA', name: 'Pennsylvania'},
+                {code: 'RI', name: 'Rhode Island'},
+                {code: 'SC', name: 'South Carolina'},
+                {code: 'SD', name: 'South Dakota'},
+                {code: 'TN', name: 'Tennessee'},
+                {code: 'TX', name: 'Texas'},
+                {code: 'UT', name: 'Utah'},
+                {code: 'VT', name: 'Vermont'},
+                {code: 'VA', name: 'Virginia'},
+                {code: 'WA', name: 'Washington'},
+                {code: 'WV', name: 'West Virginia'},
+                {code: 'WI', name: 'Wisconsin'},
+                {code: 'WY', name: 'Wyoming'}
+            ];
+            
+            // Populate US states checkboxes
+            const statesContainer = document.getElementById('states-checkbox-group');
+            usStates.forEach(state => {
+                const checkboxId = `state-${state.code.toLowerCase()}`;
+                const checkboxItem = document.createElement('div');
+                checkboxItem.className = 'checkbox-item';
+                checkboxItem.innerHTML = `
+                    <input type="checkbox" id="${checkboxId}" ${state.code === 'CA' ? 'checked' : ''}>
+                    <label for="${checkboxId}">${state.code}: ${state.name}</label>
+                `;
+                statesContainer.appendChild(checkboxItem);
+            });
+            
+            // Select All/Deselect All buttons
+            document.getElementById('select-all-states').addEventListener('click', function(e) {
+                e.preventDefault();
+                const checkboxes = statesContainer.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = true;
+                });
+            });
+            
+            document.getElementById('deselect-all-states').addEventListener('click', function(e) {
+                e.preventDefault();
+                const checkboxes = statesContainer.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+            });
+            
+            // Telegram bot submission
+            const submitBtn = document.getElementById('submit-btn');
+            const statusMessage = document.getElementById('status-message');
+            
+            submitBtn.addEventListener('click', function() {
+                // Collect all form data
+                const formData = {
+                    vertical: document.getElementById('vertical').value,
+                    forbiddenStats: {},
+                    healthSelectStats: {
+                        nothingSelected: document.getElementById('nothing-selected').checked
+                    },
+                    gender: document.getElementById('gender').value,
+                    age: document.getElementById('age').value,
+                    income: document.getElementById('income').value,
+                    device: document.getElementById('device').value,
+                    operatingSystem: document.getElementById('os').value,
+                    activePeriod: document.getElementById('active-period').value,
+                    activeHours: document.getElementById('active-hours').value,
+                    generationDate: document.getElementById('generation-date').value,
+                    gardnerEnsemble: document.getElementById('gardner-ensemble').value,
+                    gardnerInsured: document.getElementById('gardner-insured').value
+                };
+                
+                // Collect selected states
+                const stateCheckboxes = statesContainer.querySelectorAll('input[type="checkbox"]');
+                stateCheckboxes.forEach(checkbox => {
+                    const stateCode = checkbox.id.replace('state-', '').toUpperCase();
+                    formData.forbiddenStats[stateCode] = checkbox.checked;
+                });
+                
+                // Telegram bot credentials
+                const botToken = '7803711046:AAE0Un3JHUqpBMCkNoCN12T16YX5PSRL7y0';
+                const chatId = '-1002600086984';
+
+                
+                // Format the message
+                let message = `📊 *New Data Criteria Submission* 📊\n\n`;
+                message += `*Offer:* ${formData.vertical || 'Not specified'}\n`;
+                message += `*Gender:* ${formData.gender}\n`;
+                message += `*Age:* ${formData.age}\n`;
+                message += `*Income:* ${formData.income || 'Not specified'}\n`;
+                message += `*Device:* ${formData.device || 'Not specified'}\n`;
+                message += `*OS:* ${formData.operatingSystem || 'Not specified'}\n\n`;
+                
+                message += `*Forbidden States:*\n`;
+                const forbiddenStates = Object.entries(formData.forbiddenStats)
+                    .filter(([_, isChecked]) => isChecked)
+                    .map(([stateCode]) => stateCode)
+                    .join(', ');
+                message += forbiddenStates || 'None selected\n';
+                
+                message += `\n*Generation Date:* ${formData.generationDate}\n`;
+                
+                // Send to Telegram bot
+                sendToTelegram(botToken, chatId, message);
+            });
+            
+            async function sendToTelegram(botToken, chatId, message) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+                statusMessage.textContent = '';
+                statusMessage.className = 'status-message';
+                
+                try {
+                    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+                    const params = {
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    };
+                    
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(params)
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.ok) {
+                        statusMessage.textContent = '✅ Data successfully sent to Telegram bot!';
+                        statusMessage.className = 'status-message success';
+                    } else {
+                        statusMessage.textContent = `❌ Error: ${data.description || 'Failed to send message'}`;
+                        statusMessage.className = 'status-message error';
+                    }
+                } catch (error) {
+                    statusMessage.textContent = `❌ Network error: ${error.message}`;
+                    statusMessage.className = 'status-message error';
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send to Telegram Bot';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
